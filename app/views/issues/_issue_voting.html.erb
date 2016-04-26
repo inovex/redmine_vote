@@ -1,11 +1,9 @@
-<tr><td><b>
-
 <% if show_votes?(@issue) %>
-  <%= l :label_votes %>:</b></td><td>
+  <%= issue_fields_rows do |rows|
+    voting_controls = content_tag(:span, id: :voting_controls) do
+      render(:partial => "issues/voting_controls", :locals => { :issue => @issue, :success => nil })
+    end
 
-  <div id='voting_controls'>
-    <%= render :partial => "issues/voting_controls", :locals => { :issue => @issue, :success => nil } %>
-  </div>
- <% end %>
-
-</td></tr>
+    rows.left l(:label_votes), voting_controls
+  end %>
+<% end %>
